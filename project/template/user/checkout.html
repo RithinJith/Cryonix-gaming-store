@@ -1,0 +1,73 @@
+{% extends 'user/page1.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            
+            <!-- Order Summary Card -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white border-bottom pt-4 pb-3">
+                    <h3 class="mb-0 text-center"><i class="fas fa-shopping-bag text-primary mr-2"></i> Secure Checkout</h3>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="mb-3 text-muted">Order Summary</h5>
+                    
+                    <div class="list-group mb-4 shadow-sm">
+                        {% for i in items %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-light">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ i.product.image.url }}" alt="{{ i.product.Name }}" class="rounded border p-1 mr-3" style="width: 70px; height: 70px; object-fit: contain;">
+                                <div>
+                                    <h6 class="mb-1 font-weight-bold">{{ i.product.Name }}</h6>
+                                    <small class="text-muted">Quantity: {{ i.quantity }} &times; ₹{{ i.product.Price }}</small>
+                                </div>
+                            </div>
+                            <span class="font-weight-bold text-dark">₹{{ i.total }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded border">
+                        <h4 class="mb-0 text-dark">Grand Total:</h4>
+                        <h3 class="mb-0 text-success font-weight-bold">₹{{ grand_total }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods Card -->
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom pt-4 pb-3">
+                    <h4 class="mb-0 text-center">Select Payment Method</h4>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <form action="{% url 'cash_on_delivery' %}" method="post" class="h-100">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-primary btn-block h-100 py-4 d-flex flex-column align-items-center justify-content-center" style="border-width: 2px;">
+                                    <i class="fas fa-truck fa-2x mb-3 text-primary"></i>
+                                    <span class="font-weight-bold" style="font-size: 1.1rem;">Cash on Delivery</span>
+                                    <small class="mt-2 text-muted">Pay when order arrives</small>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <a href="{% url 'upi' %}" class="btn btn-outline-success btn-block h-100 py-4 d-flex flex-column align-items-center justify-content-center text-decoration-none" style="border-width: 2px;">
+                                <i class="fas fa-qrcode fa-2x mb-3 text-success"></i>
+                                <span class="font-weight-bold" style="font-size: 1.1rem;">Pay via UPI / Card</span>
+                                <small class="mt-2 text-muted">Secure online checkout</small>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5 pt-3 border-top">
+                        <a href="{% url 'cartitems' %}" class="btn btn-link text-muted"><i class="fas fa-arrow-left mr-2"></i> Return to Cart</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

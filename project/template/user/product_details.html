@@ -1,0 +1,284 @@
+{% extends 'user/page1.html' %}
+{% block content %}
+<style>
+    /* Premium Rating Design */
+    :root {
+        --rating-color: #ffc107;
+        --rating-bg: #e4e4e4;
+        --gaming-accent: #6c5ce7;
+        --card-bg: #ffffff;
+        --text-main: #2d3436;
+    }
+
+    .review-container {
+        padding: 40px 0;
+        background: #f8f9fa;
+    }
+
+    .section-title {
+        font-weight: 800;
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        color: var(--text-main);
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--gaming-accent);
+        border-radius: 2px;
+    }
+
+    /* Star Rating Selection */
+    .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+
+    .star-rating input {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 28px;
+        color: var(--rating-bg);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+        color: var(--rating-color);
+        text-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+    }
+
+    .star-rating label:active {
+        transform: scale(0.9);
+    }
+
+    /* Review Card Styling */
+    .review-card {
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        overflow: hidden;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        background: var(--gaming-accent);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+
+    .review-date {
+        font-size: 0.85rem;
+        color: #95a5a6;
+    }
+
+    .write-review-card {
+        background: #fff;
+        border-radius: 16px;
+        border-left: 5px solid var(--gaming-accent);
+    }
+
+    .btn-post-review {
+        background: var(--gaming-accent);
+        border-color: var(--gaming-accent);
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-post-review:hover {
+        background: #5b4bc4;
+        box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        color: white;
+    }
+
+    .empty-reviews {
+        text-align: center;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        border: 2px dashed #dee2e6;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <!-- Product Image and Main Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="p-4 text-center d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid rounded" style="max-height: 400px; object-fit: contain;" alt="{{ product.Name }}">
+                    {% else %}
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center w-100" style="height: 300px;">
+                        <i class="fas fa-image text-muted fa-5x"></i>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details and Actions -->
+        <div class="col-md-6">
+            <div class="pl-md-4">
+                <h1 class="font-weight-bold mb-2">{{ product.Name }}</h1>
+                <div class="mb-3">
+                    <span class="badge badge-pill badge-light text-muted px-3 py-2 border">Category: {{ product.category }}</span>
+                </div>
+                
+                <div class="d-flex align-items-baseline mb-4">
+                    <h2 class="text-primary font-weight-bold mr-3 mb-0">₹{{ product.Price }}</h2>
+                    <span class="badge {% if product.stock > 0 %}badge-success{% else %}badge-danger{% endif %} px-3 py-2">
+                        {% if product.stock > 0 %}In Stock ({{ product.stock }}){% else %}Out of Stock{% endif %}
+                    </span>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="font-weight-bold text-uppercase small text-muted letter-spacing-1">Description</h5>
+                    <p class="text-dark lead" style="font-size: 1rem; line-height: 1.6;">{{ product.Description }}</p>
+                </div>
+
+                <hr class="my-4">
+
+                {% if product.stock > 0 %}
+                <form action="{% url 'addtocart' product.id %}" method="post" class="mb-4">
+                    {% csrf_token %}
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <label class="font-weight-bold d-block mb-1 small">Quantity</label>
+                            <input type="number" name="quantity" class="form-control" value="1" min="1" max="{{product.stock}}" style="width: 100px; height: 50px; border-radius: 10px;">
+                        </div>
+                        <div class="col">
+                            <label class="d-block mb-1 small">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg px-5 shadow-sm" style="height: 50px; border-radius: 10px;">
+                                <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                <div class="alert alert-danger mb-4 rounded-lg">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> This item is currently out of stock.
+                </div>
+                {% endif %}
+                
+                <a href="{% url 'userhome' %}" class="btn btn-link text-muted pl-0"><i class="fas fa-arrow-left mr-2"></i> Back to Shop</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Section -->
+    <div class="row mt-5 pt-5 border-top">
+        <div class="col-md-7 mb-4">
+            <h3 class="section-title">Customer Reviews</h3>
+            
+            <div class="reviews-list">
+                {% for k in r %}
+                <div class="card mb-4 shadow-sm review-card bg-white">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="user-avatar">
+                                {{ k.user.username|make_list|first|upper }}
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="font-weight-bold mb-0 text-dark">{{ k.user.username }}</h6>
+                                    <span class="review-date">{{ k.created_at|date:"M d, Y" }}</span>
+                                </div>
+                                <div class="rating-display mt-1">
+                                    {% if '⭐' in k.rating %}
+                                        {# Handling emoji-based ratings from legacy system #}
+                                        <span class="text-warning">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= k.rating|length %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star text-muted" style="opacity: 0.3;"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                    {% else %}
+                                        {# Handling future integer-based ratings #}
+                                        <span class="text-warning">
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= k.rating|add:0 %}
+                                                    <i class="fas fa-star"></i>
+                                                {% else %}
+                                                    <i class="far fa-star text-muted" style="opacity: 0.3;"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text text-muted" style="line-height: 1.6;">{{ k.comment }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="empty-reviews">
+                    <i class="far fa-comments fa-3x text-muted mb-3 d-block"></i>
+                    <p class="text-muted mb-0">No reviews yet. Be the first to share your experience!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Add Review Form -->
+        <div class="col-md-5">
+            <div class="card shadow write-review-card p-4">
+                <h4 class="font-weight-bold mb-4">Write a Review</h4>
+                <form action="{% url 'add_review' product.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark mb-2">How would you rate it?</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="⭐⭐⭐⭐⭐" required/><label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="⭐⭐⭐⭐" /><label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="⭐⭐⭐" /><label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="⭐⭐" /><label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="⭐" /><label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold text-dark mb-2">Detailed Feedback</label>
+                        <textarea name="comment" class="form-control p-3 border-0 bg-light" rows="4" placeholder="What did you like or dislike about this product?" style="border-radius: 12px; resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-post-review btn-block shadow-sm">
+                        <i class="fas fa-paper-plane mr-2"></i> Submit Review
+                    </button>
+                </form>
+            </div>
+            
+            <div class="mt-4 p-4 rounded-lg bg-light text-center">
+                <p class="small text-muted mb-0">Your feedback helps other gamers make better choices. Thank you for contributing!</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

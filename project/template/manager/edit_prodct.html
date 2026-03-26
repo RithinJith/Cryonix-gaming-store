@@ -1,0 +1,63 @@
+{% extends 'manager/page1.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="card shadow-lg p-4" style="width: 550px; border-radius: 15px;">
+        <h3 class="text-center mb-4">Edit Product</h3>
+        
+        {% for k in pdata %} 
+        <form action="{% url 'edit_prodct' k.id %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label class="form-label">Product Photo</label><br>
+                {% if k.image %}
+                <img src="{{k.image.url}}" class="mb-2" width="150" style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
+                {% endif %}
+                <input type="file" name="image" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" name="Name" value="{{k.Name}}" class="form-control" required>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="text" name="price" value="{{k.Price}}" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Stock</label>
+                    <input type="number" name="stock" value="{{k.stock}}" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <select name="category" class="form-control" required>
+                    <option value="{{k.category_id}}">{{k.category.Name}}</option>
+                    {% for i in c %}
+                    {% if i.id != k.category_id %}
+                    <option value="{{i.id}}">{{i.Name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Description</label>
+                <textarea name="description" rows="4" class="form-control" required>{{k.Description}}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success w-100">Submit</button>
+            </div>
+        </form>
+        {% endfor %}
+
+        <div class="text-center mt-2">
+            <a href="{% url 'view_prodct' %}" class="btn btn-info w-100">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

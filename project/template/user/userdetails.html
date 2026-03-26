@@ -1,0 +1,58 @@
+{% extends 'user/page1.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom pt-4 pb-3">
+                    <h2 class="mb-0 text-center">User Profile</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        {% if user_details.profile_photo %}
+                            <img src="{{ user_details.profile_photo.url }}" class="rounded-circle shadow-sm" alt="Profile Photo" style="width: 150px; height: 150px; object-fit: cover; border: 4px solid #fff;">
+                        {% else %}
+                            <div class="rounded-circle shadow-sm bg-light d-inline-flex justify-content-center align-items-center" style="width: 150px; height: 150px; border: 4px solid #fff;">
+                                <span class="text-muted" style="font-size: 3rem;">👤</span>
+                            </div>
+                        {% endif %}
+                        <h4 class="mt-3 mb-0">{{ request.user.first_name }} {{ request.user.last_name }}</h4>
+                        <p class="text-muted">{{ request.user.email }}</p>
+                    </div>
+
+                    <h5 class="border-bottom pb-2 mb-3">Contact Information</h5>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted"><strong>Username:</strong></div>
+                        <div class="col-sm-8">{{ request.user.username }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted"><strong>Phone:</strong></div>
+                        <div class="col-sm-8">{{ user_details.phone }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted"><strong>Address:</strong></div>
+                        <div class="col-sm-8">{{ user_details.address }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted"><strong>City:</strong></div>
+                        <div class="col-sm-8">{{ user_details.city }}</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted"><strong>State:</strong></div>
+                        <div class="col-sm-8">{{ user_details.state }}</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted"><strong>Postal Code:</strong></div>
+                        <div class="col-sm-8">{{ user_details.postal_code }}</div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+                        <a href="{% url 'userhome' %}" class="btn btn-outline-secondary px-4">Back to Shop</a>
+                        <a href="{% url 'edituser' %}" class="btn btn-primary px-4">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

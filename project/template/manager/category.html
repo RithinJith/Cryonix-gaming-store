@@ -1,0 +1,32 @@
+{% extends 'manager/page1.html' %}
+{% block content %}
+<div class="container justify-content-center align-items-center d-flex vh-100 mt-4 mb-3">
+    <div class="card p-4 shadow" style="width: 350px; background: white;">
+        <h3 class="text-center mb-3">Add Category</h3>
+        <form action="{% url 'category' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="text" name="Name" class="form-control" required> 
+            </div>
+            <div class="mb-3">
+                <label>Description</label><br>
+                <textarea name="description" rows="4" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="form-control btn btn-success" value="Submit">
+            </div>
+        </form>
+
+        <div class="text-center">
+            <a href="{% url 'adminhome' %}" class="btn btn-info form-control">Back</a>
+        </div>
+
+        {% if messages %}
+        {% for msg in messages %}
+        <script>alert('{{msg}}')</script>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

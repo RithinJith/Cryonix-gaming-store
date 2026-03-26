@@ -1,0 +1,92 @@
+{% extends 'user/page1.html' %}
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom pt-4 pb-3">
+                    <h2 class="mb-0 text-center">Edit Profile</h2>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form action="{% url 'edituser' %}" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="text-center mb-4 pb-3 border-bottom">
+                            {% if user_details.profile_photo %}
+                                <img src="{{ user_details.profile_photo.url }}" class="rounded-circle shadow-sm mb-3" alt="Profile Photo" style="width: 130px; height: 130px; object-fit: cover; border: 3px solid #eee;">
+                            {% else %}
+                                <div class="rounded-circle shadow-sm bg-light d-inline-flex justify-content-center align-items-center mb-3" style="width: 130px; height: 130px; border: 3px solid #eee;">
+                                    <span class="text-muted" style="font-size: 2.5rem;">👤</span>
+                                </div>
+                            {% endif %}
+                            <div class="form-group mb-0">
+                                <label class="font-weight-bold text-muted small text-uppercase">Update Profile Photo</label>
+                                <input type="file" name="profile_photo" class="form-control-file d-block mx-auto mt-2 text-center" style="max-width: 260px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">First Name</label>
+                                <input type="text" name="first_name" class="form-control bg-light" value="{{ user_details.user.first_name }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">Last Name</label>
+                                <input type="text" name="last_name" class="form-control bg-light" value="{{ user_details.user.last_name }}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">Username</label>
+                                <input type="text" name="username" class="form-control bg-light" value="{{ user_details.user.username }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">Email</label>
+                                <input type="email" name="email" class="form-control bg-light" value="{{ user_details.user.email }}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">Phone</label>
+                                <input type="number" name="phone" class="form-control bg-light" value="{{ user_details.phone }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">Password</label>
+                                <input type="password" name="password" class="form-control" value="********" readonly disabled>
+                                <small class="text-muted mt-1 d-block">Please use the password reset page if you need to change your password.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="font-weight-bold">Address</label>
+                            <textarea name="address" class="form-control bg-light" rows="3">{{ user_details.address }}</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label class="font-weight-bold">City</label>
+                                <input type="text" name="city" class="form-control bg-light" value="{{ user_details.city }}">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label class="font-weight-bold">State</label>
+                                <input type="text" name="state" class="form-control bg-light" value="{{ user_details.state }}">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label class="font-weight-bold">Postal Code</label>
+                                <input type="number" name="postal_code" class="form-control bg-light" value="{{ user_details.postal_code }}">
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                            <a href="{% url 'userdetails' %}" class="btn btn-outline-secondary px-4 py-2">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-5 py-2">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

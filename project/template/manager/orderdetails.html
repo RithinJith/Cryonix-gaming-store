@@ -1,0 +1,50 @@
+{% extends 'manager/page1.html'  %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="card shadow-lg p-4" style="width: 1000px; border-radius: 15px;">
+        <h3 class="text-center mb-3">Order Details</h3>
+
+<img src="{{ item.product.image.url }}" width="150">
+
+<p ><b>Product:</b> {{ item.product.Name }}</p>
+<p><b>Price:</b> {{ item.product.Price }}</p>
+<p><b>Username:</b> {{ order.user.username }}</p>
+<p><b>Email:</b> {{ order.user.email }}</p>
+<p><b>Quantity:</b> {{ item.quantity }}</p>
+
+<p><b>OrderID:</b> {{ order.id }}</p>
+<p><b>OrderDate:</b> {{ order.orderdate }}</p>
+<p><b>OrderStatus:</b> {{ order.orderstatus }}</p>
+
+<p><b>Phone:</b> {{ user_details.phone }}</p>
+<p><b>Address:</b> {{ user_details.address }}</p>
+<p><b>City:</b> {{ user_details.city }}</p>
+<p><b>State:</b> {{ user_details.state }}</p>
+<p><b>Postal Code:</b> {{ user_details.postal_code }}</p>
+
+<p><b>Payment Method:</b> {{ order.payment_method }}</p>
+<p><b>Payment Status:</b> {{ order.paymentstatus }}</p>
+
+<p><b>Total Amount:</b> {{ order.total_amount }}</p>
+<br>
+<form method="post"  action="{% url 'orderdetails_for_manager' order.id %}" >
+    {% csrf_token %}
+<label for="">TrackingID</label>
+<input type="text" name="TrackingID" value="{{order.tracking_id}}">
+<label for="">Carrier</label>
+<input type="text" name="carrier" value="{{order.carrier}}">
+<label for="">Delivery Date</label>
+<input type="date" name="delivery_Date" value="{{order.deliverydate}}"><br>
+         <div class="mb-3">
+        <input type="submit"  name="cancel_order" value="Cancel" class="form-control btn btn-danger" >
+        </div>
+         <div class="mb-3">
+        <input type="submit" name="start_processing" class="form-control btn btn-success" >
+        </div>
+
+</form>
+
+
+    <div class="text-center">
+        <a href="{% url 'userorder_for_admin' %}" class="btn btn-info form-control">Back</a>
+    </div>{% endblock %} 
