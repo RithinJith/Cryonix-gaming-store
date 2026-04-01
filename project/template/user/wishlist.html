@@ -8,10 +8,10 @@
 
     <div class="row">
         {% for i in wishlist_items %}
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card h-100 shadow-sm border position-relative">
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="cryonix-card h-100 shadow-lg position-relative">
                 <!-- Heart toggle button (acts as remove here) -->
-                <a href="{% url 'add_to_wishlist' i.product.id %}" class="position-absolute shadow-sm bg-white rounded-circle d-flex align-items-center justify-content-center" style="top: -10px; right: -10px; width: 35px; height: 35px; z-index: 10; text-decoration: none;" title="Remove from wishlist">
+                <a href="{% url 'add_to_wishlist' i.product.id %}" class="position-absolute shadow-sm bg-cyan rounded-circle d-flex align-items-center justify-content-center" style="top: 10px; right: 15px; width: 35px; height: 35px; z-index: 10;; text-decoration: none;" title="Remove from wishlist">
                     <span style="color: red; font-size: 18px;">❤️</span>
                 </a>
                 

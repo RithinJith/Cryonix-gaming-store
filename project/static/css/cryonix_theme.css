@@ -52,6 +52,8 @@ h1, h2, h3, h4, h5, h6, .brand-font {
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
+    position: relative;
+    z-index: 1000;
 }
 
 /* Navbar */
@@ -126,6 +128,8 @@ h1, h2, h3, h4, h5, h6, .brand-font {
     border-radius: 15px;
     transition: all 0.3s ease;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 }
 
 .cryonix-card:hover {
@@ -165,6 +169,7 @@ h1, h2, h3, h4, h5, h6, .brand-font {
     border: 1px solid var(--glass-border) !important;
     color: white !important;
     border-radius: 8px !important;
+    
 }
 
 .cryonix-input:focus {
@@ -185,4 +190,47 @@ h1, h2, h3, h4, h5, h6, .brand-font {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-cyan);
+}
+
+/* Custom Table Styles */
+.table-dark-custom {
+    color: var(--text-primary) !important;
+    background: transparent !important;
+    border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+}
+
+.table-dark-custom thead th {
+    border: none !important;
+    border-bottom: 2px solid var(--accent-purple) !important;
+    background: rgba(157, 0, 255, 0.1) !important;
+    color: var(--accent-cyan) !important;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    padding: 15px !important;
+}
+
+.table-dark-custom tbody tr {
+    background: var(--bg-card) !important;
+    transition: all 0.3s ease !important;
+    border-radius: 8px !important;
+}
+
+.table-dark-custom tbody tr:hover {
+    transform: translateX(5px);
+    background: rgba(157, 0, 255, 0.1) !important;
+    box-shadow: var(--glow-cyan);
+}
+
+.table-dark-custom td {
+    border: none !important;
+    padding: 15px !important;
+    vertical-align: middle !important;
+    color: var(--text-secondary) !important;
+}
+
+.table-dark-custom td strong, 
+.table-dark-custom td b {
+    color: white !important;
 }

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static  %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aroma Shop - User Portal</title>
+	<link rel="icon" href="img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/bootstrap/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/fontawesome/css/all.min.css' %}">
+	<link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/themify-icons/themify-icons.css' %}">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/nice-select/nice-select.css' %}">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/owl-carousel/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/vendors/owl-carousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{%static 'aroma-master/aroma-master/css/style.css' %}">
+  <link rel="stylesheet" href="{%static 'css/gaming_buttons.css' %}">
+  <link rel="stylesheet" href="{%static 'css/cryonix_theme.css' %}">
+</head>
+<body>
+  <!--================ Start Header Menu Area =================-->
+<header class="header_area sticky-top">
+    <div class="main_menu">
+      <nav class="navbar navbar-expand-lg navbar-dark py-2">
+        <div class="container-fluid px-lg-3">
+          <a class="navbar-brand brand-font h3 mb-0" href="{% url 'userhome' %}" style="color: var(--accent-cyan); font-weight: 800;">
+            CRY<span style="color: var(--accent-purple);">ONIX</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+              <li class="nav-item active"><a class="nav-link" href="{% url 'userhome' %}">Home</a></li>
+              <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Account</a>
+                <ul class="dropdown-menu glass-effect border-0">
+                  <li class="nav-item"><a class="nav-link text-white" href="{% url 'userdetails' %}">Profile</a></li>
+                  <li class="nav-item"><a class="nav-link text-white" href="{% url 'vieworder' %}">My Orders</a></li>
+                  <li class="nav-item"><a class="nav-link text-white" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+
+            <ul class="nav-shop align-items-center">
+              <li class="nav-item mr-3">
+                <a href="{% url 'cartitems' %}" class="position-relative">
+                  <i class="ti-shopping-cart h4 text-white"></i>
+                  <span class="nav-shop__circle" style="background: var(--accent-cyan); top: -8px; right: -8px;">{{ cart_count }}</span>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="cryonix-btn cryonix-btn-primary" href="{% url 'userhome' %}">Shop Now</a>
+              </li> -->
+              <li class="nav-item ml-3">
+                <a href="{% url 'logout' %}" class="cryonix-btn cryonix-btn-outline" style="padding: 6px 15px; font-size: 0.75rem;">
+                   <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!--================ End Header Menu Area =================-->
+
+  <main class="page-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!--================ Start Footer Area =================-->
+  <footer class="footer">
+		<div class="footer-area">
+			<div class="container">
+				<div class="row section_gap">
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title large_title">Our Mission</h4>
+							<p>
+								To provide high-quality tech products at affordable prices while 
+          							delivering an excellent shopping experience for our customers.
+							</p>
+							<p>
+								We aim to make technology accessible to everyone by offering reliable 
+          							products, fast delivery, and trusted service.
+							</p>
+						</div>
+					</div>
+					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Quick Links</h4>
+							<ul class="list">
+								<li><a href="{% url 'userhome' %}">Home</a></li>
+								<li><a href="{% url 'userhome' %}">Shop</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+						<div class="single-footer-widget tp_widgets">
+							<h4 class="footer_title">Contact Us</h4>
+							<div class="ml-40">
+								<p class="sm-head">
+									<span class="fa fa-location-arrow"></span>
+									Head Office
+								</p>
+								<p>Kannur</p>
+	
+								<p class="sm-head">
+									<span class="fa fa-phone"></span>
+									Phone Number
+								</p>
+								<p>
+									8848707287
+								</p>
+	
+								<p class="sm-head">
+									<span class="fa fa-envelope"></span>
+									Email
+								</p>
+								<p>
+									rtx123@gmail.com <br>
+									www.wrognrtx.com
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row d-flex">
+					<p class="col-lg-12 footer-text text-center">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Aroma Shop User Portal
+</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+  <!--================ End Footer Area =================-->
+
+  <script src="{%static 'aroma-master/aroma-master/vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/skrollr.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/vendors/mail-script.js' %}"></script>
+  <script src="{%static 'aroma-master/aroma-master/js/main.js' %}"></script>
+</body>
+</html>

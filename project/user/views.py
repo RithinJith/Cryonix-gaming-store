@@ -35,14 +35,16 @@ def form(request):
         EMAIL=request.POST['email']
         password=request.POST['password']
         ADDRESS=request.POST.get('address')
-        CITY=request.POST['City']
+        CITY=request.POST['city']
         STATE=request.POST['state']
         PHONE=request.POST['phone']
         POSTAL_CODE=request.POST['postal_code']
         if User.objects.filter(username=USERNAME).exists():
             messages.error(request,'username already exist')
+            return render(request,'common/form.html')
         if User.objects.filter(email=EMAIL).exists():
              messages.error(request,'email already exist')
+             return render(request,'common/form.html')
 
         u=User.objects.create_user(first_name=FIRSTNAME,last_name=LASTNAME,username=USERNAME,password=password,email=EMAIL)
         u.save()
@@ -51,6 +53,7 @@ def form(request):
         customer_obj,create=Group.objects.get_or_create(name='CUSTOMER')
         customer_obj.user_set.add(u)
         messages.success(request,'Registration was successfull..')
+        return redirect('login_user')
         
     return render(request,'common/form.html')
 

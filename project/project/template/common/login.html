@@ -1,0 +1,100 @@
+{% extends 'common/base.html'  %}
+{% load static %}
+{% block content %}
+    <style>
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+            background: radial-gradient(circle at top right, rgba(157, 0, 255, 0.05), transparent),
+                        radial-gradient(circle at bottom left, rgba(0, 207, 255, 0.05), transparent);
+        }
+        
+        .auth-card {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-info-side {
+            background: linear-gradient(135deg, rgba(0, 207, 255, 0.1), rgba(157, 0, 255, 0.1));
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--glass-border);
+            flex: 1;
+        }
+
+        .auth-form-side {
+            padding: 3rem;
+            flex: 1.5;
+            background: rgba(10, 15, 44, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .auth-card { flex-direction: column; }
+            .auth-info-side { border-right: none; border-bottom: 1px solid var(--glass-border); }
+        }
+    </style>
+
+    <div class="auth-container">
+        <div class="auth-card glass-effect">
+            <div class="auth-info-side d-none d-md-flex">
+                <h2 class="brand-font text-white mb-3" style="font-size: 1.5rem;">Access Portal</h2>
+                <p class="text-secondary mb-4">Initialize your Cryonix connection to manage your elite hardware.</p>
+                <div class="mb-2 text-muted small uppercase letter-spacing-2">didnt have an account?</div>
+                <a class="cryonix-btn cryonix-btn-outline w-100" href="{% url 'form' %}">create account</a>
+            </div>
+            
+            <div class="auth-form-side">
+                <h3 class="brand-font mb-4" style="color: var(--accent-cyan); font-weight: 800;">Login</h3>
+                <form action="{% url 'login_user' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label class="small text-secondary uppercase font-weight-bold mb-2 d-block">Username</label>
+                        <input type="text" class="form-control cryonix-input py-4 font-weight-bold" name="username" placeholder="Enter Username" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="small text-secondary uppercase font-weight-bold mb-2 d-block">Password</label>
+                        <input type="password" class="form-control cryonix-input py-4 font-weight-bold" name="password" placeholder="Enter Password" required>
+                    </div>
+                    
+                    <button type="submit" class="cryonix-btn cryonix-btn-primary w-100 py-3 mb-4 shadow-lg">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Confirm
+                    </button>
+                    
+                    <div class="text-center">
+                        <a href="{% url 'password_reset_request' %}" class="text-secondary small hover-cyan" style="text-decoration: none;">Forgot Password?</a>
+                    </div>
+
+                    <div class="d-md-none text-center mt-4 pt-3 border-top border-secondary">
+                        <p class="text-secondary small mb-2">Unauthorized access is prohibited.</p>
+                        <a href="{% url 'form' %}" class="brand-font text-cyan" style="font-size: 0.8rem; text-decoration: none;">Create Account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if messages %}
+    {% for msg in messages  %}
+    <div class="position-fixed" style="bottom: 20px; right: 20px; z-index: 1050;">
+        <div class="glass-effect p-3 border-cyan" style="border-left: 4px solid var(--accent-cyan); color: white;">
+            <i class="fas fa-info-circle mr-2 text-cyan"></i> {{msg}}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <style>
+        .hover-cyan:hover { color: var(--accent-cyan) !important; }
+        .text-cyan { color: var(--accent-cyan); }
+    </style>
+{% endblock %}

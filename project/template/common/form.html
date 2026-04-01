@@ -55,7 +55,7 @@
     <div class="auth-container">
         <div class="auth-card glass-effect">
             <div class="text-center mb-5">
-                <h2 class="brand-font mb-2" style="color: var(--accent-cyan); font-weight: 900; letter-spacing: 5px;">RECRUITMENT</h2>
+                <h2 class="brand-font mb-2" style="color: var(--accent-cyan); font-weight: 900; letter-spacing: 5px;">CREATE ACCOUNT</h2>
                 <p class="text-secondary small uppercase letter-spacing-2">Initialize your Cryonix Elite Profile</p>
             </div>
             
@@ -63,59 +63,58 @@
                 {% csrf_token %} 
                 <div class="form-grid">
                     <div>
-                        <label class="form-label">First Designation</label>
+                        <label class="form-label">FirstName</label>
                         <input type="text" class="form-control cryonix-input" name="FirstName" placeholder="First Name" required>
                     </div>
                     <div>
-                        <label class="form-label">Last Designation</label>
+                        <label class="form-label">LastName</label>
                         <input type="text" class="form-control cryonix-input" name="LastName" placeholder="Last Name" required>
                     </div>
                     <div>
-                        <label class="form-label">System Alias</label>
+                        <label class="form-label">UserName</label>
                         <input type="text" class="form-control cryonix-input" name="username" placeholder="Username" required>
                     </div>
                     <div>
-                        <label class="form-label">Comm Link (Email)</label>
+                        <label class="form-label">Email</label>
                         <input type="email" class="form-control cryonix-input" name="email" placeholder="Email Address" required>
                     </div>
                     <div>
-                        <label class="form-label">Access Key</label>
+                        <label class="form-label">Password</label>
                         <input type="password" class="form-control cryonix-input" name="password" placeholder="Password" required>
                     </div>
                     <div>
-                        <label class="form-label">Key Confirmation</label>
+                        <label class="form-label">Confirm Password</label>
                         <input type="password" class="form-control cryonix-input" name="confirmPassword" placeholder="Confirm Password" required>
                     </div>
                     <div>
-                        <label class="form-label">Operational Sector (City)</label>
+                        <label class="form-label">City</label>
                         <input type="text" class="form-control cryonix-input" name="city" placeholder="City" required>
                     </div>
                     <div>
-                        <label class="form-label">Regional District (State)</label>
+                        <label class="form-label">State</label>
                         <input type="text" class="form-control cryonix-input" name="state" placeholder="State" required>
                     </div>
                     <div>
-                        <label class="form-label">Signal Code (Phone)</label>
+                        <label class="form-label">Phone</label>
                         <input type="number" class="form-control cryonix-input" name="phone" placeholder="Phone Number" required>
                     </div>
                     <div>
-                        <label class="form-label">Grid Coordinate (Postal)</label>
+                        <label class="form-label">Postal Code</label>
                         <input type="number" class="form-control cryonix-input" name="postal_code" placeholder="Postal Code" required>
                     </div>
                     <div style="grid-column: span 2;">
-                        <label class="form-label">Base Location (Address)</label>
+                        <label class="form-label">Address</label>
                         <textarea class="form-control cryonix-input" name="address" placeholder="Residential Address" required></textarea>
                     </div>
                     
                     <div class="submit-container">
                         <button type="submit" class="cryonix-btn cryonix-btn-primary w-100 py-3 shadow-lg">
-                            <i class="fas fa-user-plus mr-2"></i> Confirm Enlistment
-                        </button>
+                            <i class="fas fa-user-plus mr-2"></i>Submit</button>
                     </div>
                 </div>
                 
                 <div class="text-center mt-4">
-                    <p class="text-secondary small">Already part of the network? <a href="{% url 'login_user' %}" class="brand-font text-cyan" style="text-decoration: none;">Login Now</a></p>
+                    <p class="text-secondary small">Already have an account? <a href="{% url 'login_user' %}" class="brand-font text-cyan" style="text-decoration: none;">Login Now</a></p>
                 </div>
             </form>
         </div>
@@ -123,7 +122,7 @@
 
     {% if messages %}
     {% for msg in messages %}
-    <div class="position-fixed" style="bottom: 20px; right: 20px; z-index: 1050;">
+    <div class="position-fixed" style="top: 110px; left: 50%; transform: translateX(-50%); z-index: 9999;">
         <div class="glass-effect p-3 border-cyan" style="border-left: 4px solid var(--accent-cyan); color: white;">
             <i class="fas fa-info-circle mr-2 text-cyan"></i> {{msg}}
         </div>
@@ -136,4 +135,3 @@
     </style>
 {% endblock %}
 
-{% endblock %}

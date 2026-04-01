@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-y&$6cd8anlis3i0vy50a2@^w0z&u8k=n8llt45(lai1_9-7sxd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -121,20 +122,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_STORAGE='whitenoise.storage.Compressed.StaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 load_dotenv()
-
 SECRET_KEY=os.getenv('SECRET_KEY')
-EMAIL_HOST_PASSWORD=os.getenv('SECRET_KEY')
-STRIPE_SECRET_KEY=os.getenv('SECRET_KEY')
-EMAIL_HOST_USER=os.getenv('SECRET_KEY')
-DEBUG =os.getenv('SECRET_KEY') == 'TRUE'
+EMAIL_HOST_PASSWORD=os.getenv('EMAIL_HOST_PASSWORD')
+STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
+EMAIL_HOST_USER=os.getenv('EMAIL_HOST_USER')
+DEBUG =os.getenv('DEBUG') == 'True'
 
-
+# pip install whitenoise
 # wkht qoui vnwn topd
 
 

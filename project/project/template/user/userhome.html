@@ -1,0 +1,106 @@
+{% extends 'user/page1.html' %}
+{% block content %}
+
+<!-- Hero Section -->
+<!-- <section class="hero-section text-center">
+    <div class="container">
+        <p class="hero-tagline">ULTIMATE PERFORMANCE</p>
+        <h1 class="hero-title display-2">GEAR UP.<br>DOMINATE.</h1>
+        <p class="lead text-secondary mb-5 mx-auto" style="max-width: 600px;">
+            Premium PC components and gaming gear for players who demand the best. 
+            Freeze the heat, unleash the power.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#shop-now" class="cryonix-btn cryonix-btn-primary mx-2">Explore Collection</a>
+            <a href="{% url 'vieworder' %}" class="cryonix-btn cryonix-btn-outline mx-2">Track Orders</a>
+        </div>
+    </div>
+</section> -->
+
+<div class="container mb-5" id="shop-now">
+    <!-- Fast Access Bar -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <div class="glass-effect d-inline-flex p-2 gap-2">
+                <a href="{% url 'cartitems' %}" class="cryonix-btn cryonix-btn-outline" style="border-color: transparent;"><i class="fas fa-shopping-cart mr-2"></i> Cart</a>
+                <a href="{% url 'wishlistview' %}" class="cryonix-btn cryonix-btn-outline" style="border-color: transparent;"><i class="fas fa-heart mr-2"></i> Wishlist</a>
+                <a href="{% url 'userdetails' %}" class="cryonix-btn cryonix-btn-outline" style="border-color: transparent;"><i class="fas fa-user mr-2"></i> Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="glass-effect p-4 mb-5">
+        <form method="GET" class="form-row align-items-center">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-transparent border-0 text-muted"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" name="search" class="form-control cryonix-input" placeholder="Search elite gear..." value="{{request.GET.search}}">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <select name="category" class="form-control cryonix-input custom-select" style="background-image: none;">
+                    <option value="">All Categories</option>
+                    {% for k in c %}
+                    <option value="{{k.id}}" {% if request.GET.category == k.id|stringformat:"s" %}selected{% endif %}>{{k.Name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="cryonix-btn cryonix-btn-primary w-100">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Product Grid -->
+    <h3 class="mb-4 brand-font text-cyan" style="color: var(--accent-cyan);">Available Products</h3>
+    <div class="row">
+        {% for i in data %}
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="cryonix-card h-100 shadow-lg position-relative">
+                <div class="position-absolute" style="top: 15px; right: 15px; z-index: 10;">
+                    {% if i.id in w %}
+                    <a href="{% url 'add_to_wishlist' i.id %}" class="text-danger h5 mb-0"><i class="fas fa-heart"></i></a>
+                    {% else %}
+                    <a href="{% url 'add_to_wishlist' i.id %}" class="text-muted h5 mb-0 hover-cyan"><i class="far fa-heart"></i></a>
+                    {% endif %}
+                </div>
+                
+                <div class="text-center p-4 bg-dark-soft" style="background: rgba(0,0,0,0.2);">
+                    {% if i.image %}
+                    <img src="{{ i.image.url }}" class="img-fluid" style="height: 180px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0,207,255,0.2));" alt="{{ i.Name }}">
+                    {% else %}
+                    <div class="d-flex align-items-center justify-content-center" style="height: 180px; background: rgba(255,255,255,0.05);">
+                        <i class="fas fa-image text-muted fa-3x"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="card-body d-flex flex-column">
+                    <h6 class="brand-font mb-2 text-white" style="font-size: 0.9rem;">{{ i.Name }}</h6>
+                    <p class="text-accent-cyan h5 mb-4" style="color: var(--accent-cyan); font-weight: 700;">₹{{ i.Price }}</p>
+                    
+                    <div class="mt-auto d-flex justify-content-between gap-2">
+                        <a href="{% url 'productdetails' i.id %}" class="cryonix-btn cryonix-btn-outline w-100 py-2" style="font-size: 0.7rem;">Details</a>
+                        <a href="{% url 'addtocart' i.id %}" class="cryonix-btn cryonix-btn-primary w-100 py-2" style="font-size: 0.7rem;">Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5 glass-effect">
+            <div class="mb-4 text-muted"><i class="fas fa-satellite fa-4x mb-3 text-cyan" style="color: var(--accent-cyan);"></i></div>
+            <h2 class="brand-font">Signal Lost</h2>
+            <p class="text-secondary">No products found in this quadrant. Try another coordinate.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .hover-cyan:hover { color: var(--accent-cyan) !important; }
+    .text-cyan { color: var(--accent-cyan); }
+</style>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section text-center position-relative overflow-hidden">
+    <!-- Animated background glow -->
+    <div style="position:absolute; top:20%; left:50%; transform:translateX(-50%); width:600px; height:600px; background:radial-gradient(circle, rgba(0,207,255,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+    <div class="container position-relative">
+        <p class="hero-tagline mb-3" style="letter-spacing: 4px;">⚡ ULTIMATE PERFORMANCE</p>
+        <h1 class="brand-font display-2 mb-4" style="font-weight:900; line-height:1.1;">
+            GEAR UP.<br>
+            <span style="background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">DOMINATE.</span>
+        </h1>
+        <p class="mb-5 mx-auto" style="max-width:550px; color: var(--text-secondary); font-size: 1.1rem; line-height:1.8;">
+            Premium PC components and gaming hardware engineered for those who demand excellence.
+        </p>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="{% url 'login_user' %}" class="cryonix-btn cryonix-btn-primary px-5 py-3 mx-2">
+                <i class="fas fa-store mr-2"></i> Shop Now
+            </a>
+            <a href="{% url 'form' %}" class="cryonix-btn cryonix-btn-outline px-5 py-3 mx-2">
+                <i class="fas fa-user-plus mr-2"></i> Join the Elite
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Feature Highlights -->
+<section class="py-5 mb-4">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="glass-effect p-4 h-100">
+                    <i class="fas fa-bolt fa-2x mb-3" style="color: var(--accent-cyan);"></i>
+                    <h5 class="brand-font mb-2" style="font-size: 0.85rem; color: var(--accent-cyan);">Top Performance</h5>
+                    <p class="text-secondary small mb-0">Cutting-edge components for next-level builds</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-effect p-4 h-100">
+                    <i class="fas fa-shipping-fast fa-2x mb-3" style="color: var(--accent-purple);"></i>
+                    <h5 class="brand-font mb-2" style="font-size: 0.85rem; color: var(--accent-purple);">Fast Delivery</h5>
+                    <p class="text-secondary small mb-0">Rapid delivery to your base — tracked every step</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-effect p-4 h-100">
+                    <i class="fas fa-shield-alt fa-2x mb-3" style="color: var(--accent-cyan);"></i>
+                    <h5 class="brand-font mb-2" style="font-size: 0.85rem; color: var(--accent-cyan);">Warranty Assured</h5>
+                    <p class="text-secondary small mb-0">Every product backed by manufacturer warranty</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="glass-effect p-4 h-100">
+                    <i class="fas fa-headset fa-2x mb-3" style="color: var(--accent-purple);"></i>
+                    <h5 class="brand-font mb-2" style="font-size: 0.85rem; color: var(--accent-purple);">24/7 Support</h5>
+                    <p class="text-secondary small mb-0">Elite support team available round the clock</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Showcase -->
+<section class="py-5 mb-4">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="brand-font mb-2" style="color: var(--accent-cyan); letter-spacing: 3px; font-size: 0.8rem;">WHAT WE OFFER</p>
+            <h2 class="brand-font" style="font-weight: 900;">Elite <span style="color: var(--accent-purple);">Categories</span></h2>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-desktop fa-2x mb-3" style="color: var(--accent-cyan);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-cyan);">Monitors</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-microchip fa-2x mb-3" style="color: var(--accent-purple);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-purple);">GPUs</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-keyboard fa-2x mb-3" style="color: var(--accent-cyan);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-cyan);">Keyboards</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-mouse fa-2x mb-3" style="color: var(--accent-purple);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-purple);">Mice</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-headphones fa-2x mb-3" style="color: var(--accent-cyan);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-cyan);">Headsets</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-4">
+                <div class="cryonix-card p-4 category-pill">
+                    <i class="fas fa-hdd fa-2x mb-3" style="color: var(--accent-purple);"></i>
+                    <div class="brand-font" style="font-size: 0.7rem; color: var(--accent-purple);">Storage</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 mb-5">
+    <div class="container">
+        <div class="glass-effect p-5 text-center" style="border: 1px solid rgba(0,207,255,0.3); background: rgba(0,207,255,0.03);">
+            <h2 class="brand-font mb-3" style="color: var(--accent-cyan); font-size: 2rem;">Ready to Level Up?</h2>
+            <p class="mb-4" style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">
+                Create a free account and unlock access to our full gaming hardware catalog.
+            </p>
+            <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+                <a href="{% url 'form' %}" class="cryonix-btn cryonix-btn-primary px-5 py-3 mx-2">
+                    Create Account
+                </a>
+                <a href="{% url 'login_user' %}" class="cryonix-btn cryonix-btn-outline px-5 py-3 mx-2">
+                    Login
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .category-pill {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: default;
+    }
+    .category-pill:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0, 207, 255, 0.2);
+    }
+</style>
+{% endblock %}

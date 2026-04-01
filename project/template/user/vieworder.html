@@ -6,7 +6,7 @@
     <div class="row">
         {% for i in orders %}
         <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="card h-100 shadow-sm border">
+            <div class="cryonix-card h-100 shadow-lg position-relative">
                 <img src="{{ i.product.image.url }}" class="card-img-top p-3" alt="{{ i.product.Name }}" style="height: 160px; object-fit: contain;">
                 <div class="card-body d-flex flex-column text-center">
                     <h6 class="card-title font-weight-bold mb-2">{{ i.product.Name }}</h6>

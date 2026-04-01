@@ -7,7 +7,7 @@
 <div class="row">
 {% for i in items %}
     <div class="col-12 mb-4">
-        <div class="card shadow-sm">
+        <div class="cryonix-card h-100 shadow-lg position-relative">
             <div class="row no-gutters align-items-center">
                 <div class="col-md-3 text-center border-right">
                     <img src="{{ i.product.image.url }}" class="img-fluid p-3" alt="{{ i.product.Name }}" style="max-height: 200px; object-fit: contain;">
@@ -53,8 +53,12 @@
 
 
     {% if messages %}
-    {% for msg in messages  %}
-    <script>alert('{{msg}}')</script>
+    {% for msg in messages %}
+    <div class="position-fixed" style="top: 110px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        <div class="glass-effect p-3" style="border-left: 4px solid var(--accent-cyan); color: white; min-width: 250px;">
+            <i class="fas fa-info-circle mr-2 text-cyan"></i> {{msg}}
+        </div>
+    </div>
     {% endfor %}
     {% endif %}
 </div>

@@ -41,10 +41,10 @@
                 </div>
             </div>
             <div class="col-md-4 mb-3 mb-md-0">
-                <select name="category" class="form-control cryonix-input custom-select" style="background-image: none;">
+                <select name="category" class="form-control cryonix-input custom-select" style="background-image: none; ">
                     <option value="">All Categories</option>
                     {% for k in c %}
-                    <option value="{{k.id}}" {% if request.GET.category == k.id|stringformat:"s" %}selected{% endif %}>{{k.Name}}</option>
+                    <option value="{{k.id}}" {% if request.GET.category == k.id|stringformat:"s" %}selected{% endif %} >{{k.Name}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -58,7 +58,7 @@
     <h3 class="mb-4 brand-font text-cyan" style="color: var(--accent-cyan);">Available Products</h3>
     <div class="row">
         {% for i in data %}
-        <div class="col-md-4 col-lg-3 mb-4">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
             <div class="cryonix-card h-100 shadow-lg position-relative">
                 <div class="position-absolute" style="top: 15px; right: 15px; z-index: 10;">
                     {% if i.id in w %}
@@ -91,7 +91,7 @@
         </div>
         {% empty %}
         <div class="col-12 text-center py-5 glass-effect">
-            <div class="mb-4 text-muted"><i class="fas fa-satellite fa-4x mb-3 text-cyan" style="color: var(--accent-cyan);"></i></div>
+            <div class="mb-4 text-muted"><i class="fas fa-satellite fa-4x mb-5 text-cyan" style="color: var(--accent-cyan);"></i></div>
             <h2 class="brand-font">Signal Lost</h2>
             <p class="text-secondary">No products found in this quadrant. Try another coordinate.</p>
         </div>

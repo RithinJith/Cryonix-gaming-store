@@ -1,0 +1,104 @@
+{% extends 'manager/page1.html'  %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="card shadow-lg p-4" style="width: 1000px; border-radius: 15px;">
+        <h3 class="text-center mb-3">User Orders</h3>
+      <div class="row d-flex justify-content-center align-items-center ">
+        <tr>
+    
+        <a href="?status=pending" class="btn "><button id="filter-btn" class="btn btn-primary">Pending</button></a>
+        <a href="?status=Processing" class="btn "><button id="filter-btn" class="btn btn-warning">Processing</button></a>
+        <a href="?status=Completed" class="btn "><button id="filter-btn" class="btn btn-success">Completed</button></a>
+        <a href="?status=Canceled" class="btn "><button id="filter-btn" class="btn btn-danger">Cancelled</button></a>
+        <a href="?status=all" class="btn "><button id="filter-btn" class="btn btn-info">All Orders</button></a>
+    </tr>
+    </div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped border">
+        <thead class="thead-light">
+            <tr>
+                <th>Photo</th>
+                <th>Product</th>
+                <th>User</th>
+                <th>Order Status</th>
+                <th>Payment Method</th>
+                <th>Payment Status</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order %}
+            <tr>
+                <td>
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" class="rounded shadow-sm" width="60" height="60" style="object-fit: cover;">
+                    {% else %}
+                    <span class="text-muted">No Image</span>
+                    {% endif %}
+                </td>
+                <td class="font-weight-bold">{{ item.product.Name }}</td>
+                <td>{{ item.order.user.first_name }} {{ item.order.user.last_name }}</td>
+                <td>
+                    <span class="badge 
+                        {% if item.order.orderstatus == 'pending' %}badge-secondary
+                        {% elif item.order.orderstatus == 'Processing' %}badge-warning
+                        {% elif item.order.orderstatus == 'Completed' %}badge-success
+                        {% elif item.order.orderstatus == 'Canceled' %}badge-danger
+                        {% endif %} px-2 py-1">
+                        {{ item.order.orderstatus }}
+                    </span>
+                </td>
+                <td>{{ item.order.payment_method }}</td>
+                <td>
+                    <span class="text-{% if item.order.paymentstatus == 'Paid' %}success{% else %}warning{% endif %}">
+                        {{ item.order.paymentstatus }}
+                    </span>
+                </td>
+                <td class="font-weight-bold">₹{{ item.order.total_amount }}</td>
+                <td>
+                    {% if item.order.orderstatus == 'pending' %}
+                        <a href="{% url 'orderdetails_for_manager' item.order.id %}" class="btn btn-sm btn-outline-primary">Details</a>
+                    {% elif item.order.orderstatus == 'Processing' %}
+                        <div class="btn-group">
+                            <a href="{% url 'cancel_order' item.order.id %}" class="btn btn-sm btn-outline-danger">Cancel</a>
+                            <a href="{% url 'Completeorder' item.order.id %}" class="btn btn-sm btn-success">Complete</a>
+                        </div>
+                    {% else %}
+                        <span class="text-muted small">Done</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center py-5">
+                    <div class="text-muted mb-3"><i class="fas fa-box-open fa-3x"></i></div>
+                    <h5 class="text-muted font-weight-bold">No Orders Found</h5>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const status = urlParams.get('status') || 'all';
+
+document.querySelectorAll('#filter-btn').forEach(btn => {
+    if (btn.parentElement.href.includes(status)) {
+        btn.classList.add('active');
+    }
+});
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<br>
+    <div class="text-center">
+        <a href="{% url 'adminhome' %}" class="btn btn-info form-control">Back</a>
+    </div>
+
+    </div>
+</div>  
+    
+{% endblock %} 
